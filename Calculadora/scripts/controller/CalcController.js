@@ -2,6 +2,7 @@ class CalcController    {
 
     constructor()   {
 
+        this._operation = []
         this._locale = 'pt-BR'
         this._displayCalcEl = document.querySelector('#display') //manipulando DOM
         this._dateEl = document.querySelector('#data')
@@ -29,6 +30,60 @@ class CalcController    {
             element.addEventListener(event, fn, false)
         })
     }
+    
+    clearEntry()    {
+
+    }
+
+    clearAll(){
+        
+
+    }
+
+    addOperation()  {
+
+        this.operation.push(value)
+    }
+
+    setError()  {
+
+        this.displayCalc = 'ERROR'
+    }
+
+    execBtn()   {
+
+        switch  (value) {
+
+            case 'ac':
+                this.clearAll()
+                break;
+            case 'ce':
+                this.clearEntry()
+                break;
+            case 'soma':
+                this.
+                break;
+            case 'sosubtracao':
+                this.
+                break;
+            case 'divisao':
+                this.
+                break;
+            case 'multiplicacao':
+                this.
+                break;
+            case 'porcento':
+                this.
+                break;
+            case 'igual':
+                this.
+                break;
+
+            default:
+                this.setError()
+                break;
+        }
+    }
 
     initButtonsEvents() {
 
@@ -38,7 +93,9 @@ class CalcController    {
 
             this.addEventListenerAll('click drag mouseover', e => {
 
-                console.log(btn.className.baseVal.replace('btn-', ""))                
+                let textBtn = btn.className.baseVal.replace('btn-', "")
+
+                this.execBtn()
             })
 
             this.addEventListenerAll(btn, "mouseover mouseup mousedown", e=> {
