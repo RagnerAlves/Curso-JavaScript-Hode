@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
 * linguist-vendored
 *.html linguist-vendored=false
-javascript linguist-detectable=true
+*.javascript linguist-detectable=true
