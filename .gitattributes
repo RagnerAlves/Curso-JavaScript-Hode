@@ -1,5 +1,3 @@
 # Auto detect text files and perform LF normalization
-* /*text=js */
-static/* linguist-vendored
-Calculadora/static/* linguist-vendored
-Calculadora/templates/* linguist-vendored
+* linguist-vendored
+*.html linguist-vendored=false
