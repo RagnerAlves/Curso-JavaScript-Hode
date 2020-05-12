@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
-Calculadora/* .linguist-vendored
-Calculadora/* .html linguist-vendored=false
-Calculadora/* .javascript linguist-detectable=true
+Calculadora/* linguist-vendored
+Calculadora/* html linguist-vendored=false
+Calculadora/* javascript linguist-detectable=true
