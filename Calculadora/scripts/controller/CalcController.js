@@ -74,6 +74,24 @@ class CalcController    {
         let result = eval(this.operation.join(""))
 
         this._operation = [result, last]
+
+        this.setLastNumberToDisplay()
+    }
+
+    setLastNumberToDisplay()    {
+
+        let lasNumber
+
+        for ( let i = this.operation.lenght - 1; i >= 0; i--)   {
+
+            if (!this.isOperator(this.operation[i])) {
+                lastNumber = this_operation[i]
+                break;
+
+            }
+        }
+
+        this.displayCalc = lastNumber
     }
 
     addOperation(value)  {
@@ -90,6 +108,8 @@ class CalcController    {
 
             } else {
                 this.pushOperation(value)
+
+                this.setLastNumberToDisplay()
             }
 
         } else {    
@@ -98,10 +118,12 @@ class CalcController    {
 
                 this.pushOperation(value)
 
-            }    else {
+            }  else {
 
                 let newValue = this.getLastOperation.toString() + value.toString()
                 this.setLastOperation(parseInt(newValue))
+
+                this.setLastNumberToDisplay()
             }
         }
 
