@@ -33,6 +33,7 @@ class CalcController    {
     
     clearEntry()    {
 
+        this.operation.pop();
     }
 
     clearAll(){
@@ -40,9 +41,43 @@ class CalcController    {
 
     }
 
-    addOperation()  {
+    getLastOperation()  {
+
+        return this.operation[this.operation.length-1]
+    }
+
+    setLastOperation(value) {
+        this.operation[this.operation.length-1] = value
+    }
+
+    isOperator()    {
+
+        return (['+', '-', '*', '%', '/'].index.Of(value) > - 1)
+    }
+
+    addOperation(value)  {
+
+        if (isNaN(this.getLastOperation()))   {
+            
+            if (this.getLastOperation(value))   {
+
+                this.setLastOperation(value)
+
+            } else if (isNaN(value))    {
+
+
+            } else {
+                this.operation.push(newValue)
+            }
+
+        } else {    
+
+            let newValue = this.getLastOperation.toString() + value.toString()
+            this.setLastOperation(parseInt(newValue))
+        }
 
         this.operation.push(value)
+        console.log(this.operation)
     }
 
     setError()  {
@@ -61,27 +96,43 @@ class CalcController    {
                 this.clearEntry()
                 break;
             case 'soma':
-                this.
+                this.addOperation('+')
                 break;
-            case 'sosubtracao':
-                this.
+            case 'subtracao':
+                this.addOperation('-')
                 break;
             case 'divisao':
-                this.
+                this.addOperation('/')
                 break;
             case 'multiplicacao':
-                this.
+                this.addOperation('*')
                 break;
             case 'porcento':
-                this.
+                this.addOperation('%')
                 break;
             case 'igual':
-                this.
+                this.addOperation('=')
+                break;
+            case 'ponto':
+                this.addOperation('.')
                 break;
 
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                this.addoperation(parseInt(value))
+                break;
             default:
                 this.setError()
                 break;
+            
         }
     }
 
