@@ -21,6 +21,8 @@ class CalcController    {
            this.setDisplayDateTime()
 
         }, 1000 )
+
+        this.setLastNumberToDisplay()
     }
 
     addEventListenerAll(element, events, fn)   {
@@ -33,12 +35,14 @@ class CalcController    {
     
     clearEntry()    {
 
-        this.operation.pop();
+        this._operation = []
+        this.setLastNumberToDisplay()
     }
 
     clearAll(){
         
-
+        this.operation.pop();
+        this.setLastNumberToDisplay()
     }
 
     getLastOperation()  {
@@ -70,10 +74,25 @@ class CalcController    {
 
     calc()  {
 
-        let last = this.operation.pop()
+        let last = ''
+
+        if (this.operation.lenght > 3)  {
+            
+            let last = this.operation.pop()
+        }
+                
         let result = eval(this.operation.join(""))
 
-        this._operation = [result, last]
+        if (last == '%')    {
+
+            result /= 100
+
+        } else {
+
+            this._operation = [result]
+        }
+
+        if (!lastNumber) lastNumber = 0
 
         this.setLastNumberToDisplay()
     }
@@ -87,9 +106,10 @@ class CalcController    {
             if (!this.isOperator(this.operation[i])) {
                 lastNumber = this_operation[i]
                 break;
-
             }
         }
+
+        if (!lastNumber (lastNumber = 0))
 
         this.displayCalc = lastNumber
     }
@@ -163,6 +183,7 @@ class CalcController    {
                 break;
             case 'igual':
                 this.addOperation('=')
+                this.calc()
                 break;
             case 'ponto':
                 this.addOperation('.')
