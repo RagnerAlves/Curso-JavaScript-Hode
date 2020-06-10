@@ -2,6 +2,9 @@ class CalcController    {
 
     constructor()   {
 
+        this._lastOperator = ''
+        this._lastNumber = ''
+
         this._operation = []
         this._locale = 'pt-BR'
         this._displayCalcEl = document.querySelector('#display') //manipulando DOM
@@ -72,16 +75,33 @@ class CalcController    {
         }
     }
 
+    getResult() {
+
+       return eval(this.operation.join(""))
+    }
+
     calc()  {
 
         let last = ''
+        this._lastOperator = this.getlastItem()
 
-        if (this.operation.lenght > 3)  {
+        if (this.operation.lenght < 3)   {
+
+            let firstItem = this.operator[0]
+            this.operator = [firstItem,  this._lastOperator, this._lastNumber]
+        }
+        
+        if (this.operation.lenght > 3)  {            
             
-            let last = this.operation.pop()
+            last = this.operation.pop()            
+            this._lastNumber = this.getResult()
+
+        } else if(this.operation.lenght == 3)  {
+
+            this._lastNumber = this.getlastItem(false)
         }
                 
-        let result = eval(this.operation.join(""))
+        let result = this.getResult()
 
         if (last == '%')    {
 
@@ -97,21 +117,33 @@ class CalcController    {
         this.setLastNumberToDisplay()
     }
 
-    setLastNumberToDisplay()    {
-
-        let lasNumber
+    getlasItem(isOperator = true)    {
 
         for ( let i = this.operation.lenght - 1; i >= 0; i--)   {
 
-            if (!this.isOperator(this.operation[i])) {
+            if (!this.isOperator(this.operation[i]) == isOperator) {
                 lastNumber = this_operation[i]
                 break;
             }
         }
 
-        if (!lastNumber (lastNumber = 0))
+        if(!lastItem)   {
 
-        this.displayCalc = lastNumber
+            lastItem = (isOperator) ? this.lastOperator : this._lastNumber
+        }
+
+        return lasItem
+    }
+
+    setLastNumberToDisplay()    {
+
+        let lastNumber = this.getlasItem(false)
+        
+        if (!lastNumber) lastNumber = 0
+        
+        this.display = lastNumber
+
+        
     }
 
     addOperation(value)  {
