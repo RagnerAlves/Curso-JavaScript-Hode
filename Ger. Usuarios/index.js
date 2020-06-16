@@ -1,16 +1,42 @@
 var fields = document.querySelectorAll("#form-user-create [name]")
 var user = {}
 
-fields.forEach(function(field, index){
+function addLine(dataUser)  {
 
-    if (field.name === "gender" && field.checked == true)   {
-        user[field.name] = field.value
-           
-    } else {
+    var tr = document.createElement("tr")
+    
+    tr.innerHTML = 
+    `<tr>
+        <td><img src="dist/img/user1-128x128.jpg" alt="User Image" class="img-circle img-sm"></td>
+        <td>${dataUser.name}</td>
+        <td>${dataUser.email}</td>
+        <td>${dataUser.admin}</td>
+        <td>${dataUser.data}</td>
+        <td>
+        <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
+        <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
+        </td>
+    </tr>`
 
-        user[field.name] = field.value
-    }
+    document.getElementById("table-users").appendChild(tr)
+}
 
-    //console.log(field.id, field.name, field.nodeValue, field.checked, index)
+document.getElementById("form-user-create").addEventListener("submit", function (){
+
+    event.preventDefault()
+
+    fields.forEach(function(field, index){
+
+        if (field.name === "gender" && field.checked == true)   {
+            user[field.name] = field.value
+               
+        } else {
+    
+            user[field.name] = field.value
+        }
+    
+    })
+
+    addLine(user)
 
 })
