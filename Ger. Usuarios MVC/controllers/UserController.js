@@ -35,7 +35,7 @@ class UserController    {
 
         return new Promise((resolve, reject) =>   {
             
-            let fileReader= new FileReader()
+            let fileReader = new FileReader()
 
         let elements = [...this.formEl.elements].filter(item => {
 
@@ -55,9 +55,11 @@ class UserController    {
             reject(e)
         }
 
-        fileReader.readAsDataURL(file)
-    
-
+        if (file){
+            fileReader.readAsDataURL(file)
+        } else{
+            resolve('dist/img/boxed-bg.jpg')
+        }
     })
 }
 // close getPhoto
@@ -71,6 +73,10 @@ class UserController    {
             if (field.name === "gender")   {
                 user[field.name] = field.value
                    
+            } else if (field.name == "admin") {
+
+                user[field.name] =  field.checked
+
             } else {
         
                 user[field.name] = field.value
@@ -92,19 +98,21 @@ class UserController    {
 //close getValues
 
     addLine(dataUser)  {
+
+        let tr = document.createElement('tr')
         
-        this.tableEl.innerHTML =
-        `<tr>
+        tr.innerHTML =  `
             <td><img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm"></td>
             <td>${dataUser.name}</td>
             <td>${dataUser.email}</td>
-            <td>${dataUser.admin}</td>
+            <td>${(dataUser.admin) ? "Sim" : "Não" }</td>
             <td>${dataUser.data}</td>
             <td>
                 <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
                 <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
-            </td>
-        </tr>`    
+            </td> `
+
+        this.tableEl.appendChild(tr)
     }
 //close addLine
 
