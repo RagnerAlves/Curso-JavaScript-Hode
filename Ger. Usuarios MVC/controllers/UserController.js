@@ -75,8 +75,15 @@ class UserController    {
     getvalues() {
 
         let user = {}
+        let isValid = true
 
-        (...this.formEl.elements).forEach(function(field, index){
+        (...this.formEl.elements).forEach(function (field, index){
+
+            if (['name', 'email', 'pasword'].indexOf(field.name) > -1 && !field.value) { // array onde irá verificar e validar se a inf. do form. foi preenchido buscando em field.name do form se os campos são diferentes de vazios
+
+                field.parentElemnt.classList.add('hass-error') //adicionar em field uma class formGroup, metodo add, entao posso add + uma classe
+                isValid = false  // parar o envio do formulario caso retorno a classe que foi add ('hass-error')
+            }
 
             if (field.name === "gender")   {
                 user[field.name] = field.value
@@ -104,6 +111,11 @@ class UserController    {
 
     }
 //close getValues
+
+    if  (isValid) {
+
+        return false
+    }
 
     addLine(dataUser)  {
 
