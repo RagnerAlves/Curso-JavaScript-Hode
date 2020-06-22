@@ -11,8 +11,6 @@ class User{
         this._photo = photo
         this._admin = admin
         this._register = new Date()
-
-
     }
 
     get register()  {
@@ -63,6 +61,10 @@ class User{
     get admin()    {
 
         return this._admin
+    }
+    set photo(value) {
+
+        this._photo = value
     }
 
 }

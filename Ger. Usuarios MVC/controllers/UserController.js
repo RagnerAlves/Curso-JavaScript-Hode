@@ -15,9 +15,9 @@ class UserController    {
 
             event.preventDefault() // 
 
-            let btn = this.formEl.querySelector(["type=submit"]) // buscando element tipo submit
+            let btn = this.formEl.querySelector(["type=submit"]) // buscando element tipo submit no formulario para travar o botão do type "Salvar".
 
-            btn.disable = true
+            btn.disable = true // travar/desabilitar o botão "submit"
 
             let values = this.getValue()
 
@@ -25,11 +25,11 @@ class UserController    {
                 (content) => {
 
                     value.photo = content
-                    this.addLine(value) // atribuindo ao objeto value
-                    
-                    this.formEl.reset() // limpando o formulario
+                    this.addLine(values) // atribuindo ao objeto values
 
-                    btn.disabled = false
+                    btn.disabled = false // habilitando o botão "submit" depois do formulario ser enviado
+
+                    this.formEl.reset() // limpando o formulario
 
                 }, (e) =>   {
                     console.error(e)
@@ -97,6 +97,8 @@ class UserController    {
                 user[field.name] = field.value
             }        
         })
+
+        if (!isValid) return false
     
         return new User(
             user.name, 
@@ -108,14 +110,9 @@ class UserController    {
             user.photo, 
             user.admin
         )
+}
 
-    }
 //close getValues
-
-    if  (isValid) {
-
-        return false
-    }
 
     addLine(dataUser)  {
 
