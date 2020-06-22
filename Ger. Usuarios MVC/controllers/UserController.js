@@ -148,7 +148,14 @@ class UserController    {
         [...this.tableEl.children].forEach(tr => {  // element "children" que contem a qnt de usuario. Então para ajustar esta lista a mesma é colocaa em um array e com a funcao SPREAD a mesma organiza dentro do array os elementos
 
             numberUsers++
+
+            let user = JSON.parse(tr.dataset.user)
+
+            if (user._admin) numberAdmin++ 
         })
+
+        documento.querySelector("#number-users").innerHTML = numberUsers
+        documento.querySelector("#number-users-admin").innerHTML = numberAdmin
     }
 
 }
