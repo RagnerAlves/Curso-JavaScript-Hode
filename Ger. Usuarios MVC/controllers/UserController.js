@@ -21,6 +21,8 @@ class UserController    {
 
             let values = this.getValue()
 
+            if (!values) return false
+
             this.getPhoto().then(
                 (content) => {
 
@@ -117,6 +119,8 @@ class UserController    {
     addLine(dataUser)  {
 
         let tr = document.createElement('tr')
+
+        tr.dataset.user = JSON.stringify(dataUser) // convertendo objeto para string JSON
         
         tr.innerHTML =  `
             <td><img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm"></td>
@@ -130,7 +134,21 @@ class UserController    {
             </td> `
 
         this.tableEl.appendChild(tr)
+
+        this.updateCount()
     }
 //close addLine
+
+
+    updateCount(){ // contanto de cadastro usuario
+
+        let numberUsers = 0   // variavel ususario -> para salvar as quantidades
+        let numberAdmin = 0;  // admin
+
+        [...this.tableEl.children].forEach(tr => {  // element "children" que contem a qnt de usuario. Então para ajustar esta lista a mesma é colocaa em um array e com a funcao SPREAD a mesma organiza dentro do array os elementos
+
+            numberUsers++
+        })
+    }
 
 }
