@@ -1,15 +1,15 @@
-class UserController    {
+class UserController    {   // classe UserController ondecontém todos os metodos e acoes do User
 
-    constructor(formId, tableId)   {
+    constructor(formId, tableId)   {    // construtor para pegar o formID e a tableId onde será salva os registros do formulario
 
         this.formEl = document.getElementById(formId)
         this.tableEl = document.getElementById(tableId)
         
-        this.onSubmit()
+        this.onSubmit() // salvar form
     }
 //close constructor
 
-    onSubmit()    {
+    onSubmit()    {     //metodo botão salvar "submit"
 
         this.formEl.addEventListener("submit", event => { // event para enviar o formulario
 
@@ -116,11 +116,11 @@ class UserController    {
 
 //close getValues
 
-    addLine(dataUser)  {
+    addLine(dataUser)  { // adiciona toda as informações do usuario preenchidas no formulario
+  
+        let tr = document.createElement('tr')  // cria o elemneto 'tr'onde o mesmo é manipluado via JS
 
-        let tr = document.createElement('tr')
-
-        tr.dataset.user = JSON.stringify(dataUser) // convertendo objeto para string JSON
+        tr.dataset.user = JSON.stringify(dataUser) // convertendo objeto para string JSON onde  o mesmo será enviado e salvoem "submit"
         
         tr.innerHTML =  `
             <td><img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm"></td>
@@ -133,29 +133,30 @@ class UserController    {
                 <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
             </td> `
 
-        this.tableEl.appendChild(tr)
+        this.tableEl.appendChild(tr) // adiciona o formulario ao filho da próxima tabela
 
-        this.updateCount()
+        this.updateCount()  // conta o número de cadastro efetivados
     }
 //close addLine
 
 
     updateCount(){ // contanto de cadastro usuario
 
-        let numberUsers = 0   // variavel ususario -> para salvar as quantidades
-        let numberAdmin = 0;  // admin
+        let numberUsers = 0  
+        let numberAdmin = 0;  
 
-        [...this.tableEl.children].forEach(tr => {  // element "children" que contem a qnt de usuario. Então para ajustar esta lista a mesma é colocaa em um array e com a funcao SPREAD a mesma organiza dentro do array os elementos
+        [...this.tableEl.children].forEach(tr => {  // [...]spred irá ordenar os elementos do meu array que serão percoirridos para serem contatados e assim atualizar o updatCount. element "children" que contem a qnt de usuarios/elements quequero percorrer.
 
-            numberUsers++
+            numberUsers++       //operador incrmental para o forEach
 
-            let user = JSON.parse(tr.dataset.user)
+            let user = JSON.parse(tr.dataset.user) // trasnforma novamente o JSON em um Objeto
 
-            if (user._admin) numberAdmin++ 
+            if (user._admin) numberAdmin++  // validar admin 
         })
 
-        documento.querySelector("#number-users").innerHTML = numberUsers
+        documento.querySelector("#number-users").innerHTML = numberUsers    // elemento que serão atualizados na tela
         documento.querySelector("#number-users-admin").innerHTML = numberAdmin
     }
+//close updateCount
 
 }
