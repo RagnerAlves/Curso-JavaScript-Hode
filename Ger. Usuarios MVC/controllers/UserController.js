@@ -5,11 +5,21 @@ class UserController    {   // classe UserController ondecontém todos os metodo
         this.formEl = document.getElementById(formId)
         this.tableEl = document.getElementById(tableId)
         
-        this.onSubmit() // salvar form
+        this.onSubmit() // chamando botao salvar form
+        this.onEdit() // chamando o botão "cancel"
     }
 //close constructor
 
-    onSubmit()    {     //metodo botão salvar "submit"
+    onEdit()  { // evento botão cancelar edição usuário
+
+        document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e=> {
+
+            this.showPanelCreate()
+        })
+    }
+//close onEditCancel
+
+    onSubmit()    {     //metodo botão salvar "novo usuario" "submit"
 
         this.formEl.addEventListener("submit", event => { // event para enviar o formulario
 
@@ -129,9 +139,17 @@ class UserController    {   // classe UserController ondecontém todos os metodo
             <td>${(dataUser.admin) ? "Sim" : "Não" }</td>
             <td>${Utils.dateFormat(dataUser.register)} </td>
             <td>
-                <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
+                <button type="button" class="btn btn-primary btn-edit btn-xs btn-flat">Editar</button>
                 <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
             </td> `
+
+        tr.querySelector(".btn-edit").addEventListener("clicl", e => {      // buscando pelo botão editar com querySelector "btn-edit" e adicionando o evento de "click" passando um paramento e => "evento"
+
+        console.log(JSOn.parse(tr.dataset.user))
+        
+        this.showPanelUpdate()
+
+        }) 
 
         this.tableEl.appendChild(tr) // adiciona o formulario ao filho da próxima tabela
 
@@ -139,6 +157,17 @@ class UserController    {   // classe UserController ondecontém todos os metodo
     }
 //close addLine
 
+    showPanelCreate()   {   //mostra painel para criar
+
+        document.querySelector("#box-user-create").style.display = "block" // selecionando form onde será criado
+        document.querySelector("#box-user-update").style.display = "none"  // form que sera atualizado
+    }
+
+    showPanelUpdate()   {   //mostra painel para update
+
+        document.querySelector("#box-user-create").style.display = "none" // none é para esconder o painel de criacao e mostrar somente o de edicao
+        document.querySelector("#box-user-update").style.display = "block" // mostrao painel de edição/update
+    }
 
     updateCount(){ // contanto de cadastro usuario
 
