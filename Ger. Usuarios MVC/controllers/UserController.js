@@ -27,7 +27,7 @@ class UserController    {   // classe UserController ondecontém todos os metodo
 
             let btn = this.formEl.querySelector(["type=submit"]) // buscando element tipo submit no formulario para travar o botão do type "Salvar".
 
-            btn.disable = true // travar/desabilitar o botão "submit"
+            btn.disable = true    // travar/desabilitar o botão "submit"
 
             let values = this.getValue()
 
@@ -37,11 +37,11 @@ class UserController    {   // classe UserController ondecontém todos os metodo
                 (content) => {
 
                     value.photo = content
-                    this.addLine(values) // atribuindo ao objeto values
+                    this.addLine(values)    // atribuindo ao objeto values
 
-                    btn.disabled = false // habilitando o botão "submit" depois do formulario ser enviado
+                    btn.disabled = false    // habilitando o botão "submit" depois do formulario ser enviado
 
-                    this.formEl.reset() // limpando o formulario
+                    this.formEl.reset()     // limpando o formulario
 
                 }, (e) =>   {
                     console.error(e)
@@ -143,11 +143,24 @@ class UserController    {   // classe UserController ondecontém todos os metodo
                 <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
             </td> `
 
-        tr.querySelector(".btn-edit").addEventListener("clicl", e => {      // buscando pelo botão editar com querySelector "btn-edit" e adicionando o evento de "click" passando um paramento e => "evento"
+        tr.querySelector(".btn-edit").addEventListener("click", e => {      // buscando pelo botão editar com querySelector "btn-edit" e adicionando o evento de "click" passando um paramento e => "evento"
 
-        console.log(JSOn.parse(tr.dataset.user))
-        
-        this.showPanelUpdate()
+            let json = JSOn.parse(tr.dataset.user) // retorna os valores com os nome /lista de objetos
+            let form = document.querySelector("#form-user-update") // expecificar o formulario -> variavel para o formulario
+
+            for (let name in json)    { // forIN para percorrer minha lista de objetos Json para serem preenchidos.
+
+                let field = form.querySelector("[name=" + name.replace("_", "") + "]") // substituindo onde tem "_" pelo JSON, replace troca por " ".
+
+                if (field) {
+                    
+                    if (fiel.type == 'file') continue
+                    
+                    field.value = json[name]
+                }
+            }
+
+            this.showPanelUpdate() // chama painel de edição do formulario
 
         }) 
 
