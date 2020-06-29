@@ -2,11 +2,9 @@ var listElement = document.querySelector('#app ul')
 var inputElement = document.querySelector('#app input')
 var buttonElement = document.querySelector('#app button')
 
-var todoos = [
-    'Fazer café',
-    'Estudar C#',
-    'Acessar Comunidade'
-]
+var to
+
+var todoos = JSON.parse(localStorage.getItem('list_todoos')) || []
 
 function renderTodoos() {
 
@@ -41,8 +39,9 @@ function addTodoo() {
     var todooText = inputElement.value
 
     todoos.push(todooText)
-        inputElement.value = ''
-        renderTodoos()
+    inputElement.value = ''
+    renderTodoos()
+    saveToStorage()
 }
 
 buttonElement.onclick = addTodoo
@@ -52,4 +51,9 @@ function deleteTodoo(pos)  {
 
     todoo.splice(pos, 1)
     renderTodoos()
+    saveToStorage()
+}
+
+function saveToStorage()    {
+    localStorage.setItem('list_todoos', JSON.stringify(todoos))
 }
