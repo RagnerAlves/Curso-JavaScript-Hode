@@ -7,3 +7,14 @@ var todoos = [
     'Estudar C#',
     'Acessar Comunidade'
 ]
+
+function renderTodoos() {
+    for (todoo of todoos)   {
+
+        var todooElement = document.createElement('li')
+        var todooText = document.createTextNode(todoo)
+
+        todooElement.appendChild(todooText)
+        listElement.appendChild(todooElement)
+    }
+}
