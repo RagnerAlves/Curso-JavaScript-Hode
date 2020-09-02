@@ -4,6 +4,7 @@ class UserController    {   // classe UserController ondecontém todos os metodo
 
         this.formEl = document.getElementById(formId)
         this.tableEl = document.getElementById(tableId)
+ 
         
         this.onSubmit() // chamando botao salvar form
         this.onEdit() // chamando o botão "cancel"
